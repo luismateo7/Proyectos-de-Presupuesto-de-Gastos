@@ -9,7 +9,7 @@ const NuevoPresupuesto = ({presupuesto, setPresupuesto, setIsValidPresupuesto}) 
         e.preventDefault();
         
         setIsValidPresupuesto(false);
-        
+
         setMensaje('');
         if(!(presupuesto) || presupuesto < 1){
             setMensaje('No es un prespuesto válido')
@@ -17,7 +17,6 @@ const NuevoPresupuesto = ({presupuesto, setPresupuesto, setIsValidPresupuesto}) 
         }
         
         setIsValidPresupuesto(true);
-
     }
 
     return (
