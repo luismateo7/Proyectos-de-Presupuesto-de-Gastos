@@ -13,6 +13,7 @@ const Modal = ({setModal, animarModal, setAnimarModal, guardarGasto, gastosEdita
 
     const handleOcultarModal = ()=>{
         setAnimarModal(false);
+        setGastosEditar({});
     
         setTimeout(() => {
             setModal(false);
@@ -107,7 +108,7 @@ const Modal = ({setModal, animarModal, setAnimarModal, guardarGasto, gastosEdita
 
                 </div>
 
-                <input type="submit" value={guardarGasto.nombre ? 'Añadir gasto' : 'Guardar Cambios'}/>
+                <input type="submit" value={gastosEditar.nombre ? 'Guardar Cambios' : 'Añadir gasto'}/>
 
             </form>
         </div>

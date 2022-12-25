@@ -45,6 +45,11 @@ function App() {
     }, 500);
   }
 
+  const eliminarGasto = id =>{
+    const gastosActualizados = gastos.filter(gasto => gasto.id !== id)
+    setGastos(gastosActualizados)
+  }
+
   useEffect(()=>{
     if(Object.keys(gastosEditar).length > 0){
       handleNuevoGasto();
@@ -68,6 +73,7 @@ function App() {
             <ListadoGastos
               gastos={gastos}
               setGastosEditar={setGastosEditar}
+              eliminarGasto={eliminarGasto}
             />
           </main>
 
