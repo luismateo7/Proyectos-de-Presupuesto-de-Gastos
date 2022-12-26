@@ -15,11 +15,11 @@ function App() {
   const[modal, setModal] = useState(false);
   const[animarModal, setAnimarModal] = useState(false);
 
-  const[gastos, setGastos] = useState([]);
+  const[gastos, setGastos] = useState(
+    localStorage.getItem('gastos') ? JSON.parse(localStorage.getItem('gastos')) : []
+  );
 
   const[gastosEditar, setGastosEditar] = useState({})
-
-  // const[]
 
   const handleNuevoGasto = ()=>{
     setModal(true);
@@ -64,10 +64,14 @@ function App() {
     localStorage.setItem('presupuesto', presupuesto ?? 0)
   }, [presupuesto])
 
-useEffect(() => {
-  const presupuestoLS = Number(localStorage.getItem('presupuesto')) ?? 0;
-  presupuestoLS > 0 && setIsValidPresupuesto(true);
-}, [])
+  useEffect(() => {
+    const presupuestoLS = Number(localStorage.getItem('presupuesto')) ?? 0;
+    presupuestoLS > 0 && setIsValidPresupuesto(true);
+  }, [])
+
+  useEffect(()=>{
+    localStorage.setItem('gastos', JSON.stringify(gastos) ?? [])
+  }, [gastos])
 
 
   return (
