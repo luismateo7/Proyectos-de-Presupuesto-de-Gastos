@@ -13,7 +13,7 @@ const Modal = ({setModal, animarModal, setAnimarModal, guardarGasto, gastosEdita
 
     const handleOcultarModal = ()=>{
         setAnimarModal(false);
-        setGastosEditar({});
+        setGastosEditar({}); //Si el form se cerró y tenía gastos a editar entonces lo deja vacío almenos que otra vez quiera editar cuyo caso tiene que hacer el SwipeAction
     
         setTimeout(() => {
             setModal(false);
@@ -33,7 +33,7 @@ const Modal = ({setModal, animarModal, setAnimarModal, guardarGasto, gastosEdita
             return
         }
 
-        setGastosEditar({});
+        setGastosEditar({}); //Limpiar los gastos a editar
         guardarGasto({nombre, cantidad, categoria,id, fecha});
     }
 
@@ -45,7 +45,7 @@ const Modal = ({setModal, animarModal, setAnimarModal, guardarGasto, gastosEdita
         setId(gastosEditar.id)
         setFecha(gastosEditar.fecha)
       }
-    }, [])
+    }, []) //Si el state gstosEditar que pase por Prop contiene algo es porque hay algo que editar por lo tanto los input del form van a tener sus valores con el gasto de ese state gastosEditar
 
     return (
         <div className='modal'>

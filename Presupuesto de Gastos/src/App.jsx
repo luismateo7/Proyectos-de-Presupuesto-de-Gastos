@@ -36,7 +36,9 @@ function App() {
   }
 
   const guardarGasto = gasto =>{
-    if(gasto.id){
+  //Si cuenta con un id entonces ya existe ese gasto y solo se lo edita, sino es un gasto nuevo
+  
+  if(gasto.id){
       //Editar Gasto
       const gastosActualizados = gastos.map(gastoState => gastoState.id === gasto.id ? gasto : gastoState)
       setGastos(gastosActualizados)
@@ -57,34 +59,34 @@ function App() {
 
   const eliminarGasto = id =>{
     const gastosActualizados = gastos.filter(gasto => gasto.id !== id)
-    setGastos(gastosActualizados)
+    setGastos(gastosActualizados) //Devuelve todos los datos menos el que tiene el id que quiero eliminar
   }
 
   useEffect(()=>{
     if(Object.keys(gastosEditar).length > 0){
       handleNuevoGasto();
     }
-  }, [gastosEditar])
+  }, [gastosEditar]) //Cuando se hace el leadingActions(Editar) del compontente Gasto, se dispara el modal para editar el gasto
 
   useEffect(()=>{
     localStorage.setItem('presupuesto', presupuesto ?? 0)
-  }, [presupuesto])
+  }, [presupuesto]) //Guardar el presupuesto en LS
 
   useEffect(() => {
     const presupuestoLS = Number(localStorage.getItem('presupuesto')) ?? 0;
     presupuestoLS > 0 && setIsValidPresupuesto(true);
-  }, [])
+  }, []) //Si ya hay presupuesto guardado en LS entonces lo redirijo directamente para que vea el componente del Listado de Gastos
 
   useEffect(()=>{
     localStorage.setItem('gastos', JSON.stringify(gastos) ?? [])
-  }, [gastos])
+  }, [gastos]) //Guardar todos los gastos en LS cuando cambia
 
   useEffect(()=>{
     if(filtro.length > 0){
       const gastosFiltrados = gastos.filter(gasto => gasto.categoria === filtro)
       setGastosFiltrados(gastosFiltrados)
     }
-  }, [filtro])
+  }, [filtro]) //Cuando filtro cambia lo pongo en su state y luego si hay algo muestro esos gastos filtrados en el componente Listado de Gastos 
 
   return (
     <div className={modal ? 'fijar' : ''}>
