@@ -345,6 +345,7 @@ main {
     top: 3rem;
     width: 3rem;
     height: 3rem;
+    z-index: 1;
 }
 .modal .cerrar-modal img {
     width: 100%;
