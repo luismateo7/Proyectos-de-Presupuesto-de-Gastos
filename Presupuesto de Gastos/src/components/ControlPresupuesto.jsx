@@ -33,12 +33,30 @@ const ControlPresupuesto = ({presupuesto, gastos, setGastos, setPresupuesto, set
     }
 
     const handleResetApp = ()=>{
-        const resltado = confirm('Deseas reiniciar el presupuesto y los gastos')
-        if(presupuesto){
-            setGastos([]);
-            setPresupuesto(0);
-            setIsValidPresupuesto(false);
-        }
+        Swal.fire({
+            title: 'Estas seguro que deseas eliminar el presupuesto y los gastos?',
+            text: "No podrás revertir esta acción!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: 'var(--azul)',
+            cancelButtonColor: '#db2777',
+            confirmButtonText: 'Si, eliminarlo!',
+            cancelButtonText: 'Cancelar',
+            width: '50rem',
+            textSize: '2rem'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Has reseteado el presupuesto y los gastos',
+                    text: 'Has eliminado exitosamente la información',
+                    icon: 'success'
+                }).then(()=>{
+                    setGastos([])
+                    setPresupuesto(0)
+                    setIsValidPresupuesto(false)
+                })  
+            }
+        })
     }
 
     return (
